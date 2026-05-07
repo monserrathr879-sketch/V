@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu nombre en mi mano - Your Name</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Playfair Display', serif;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        /* Fondo animado (Video de fondo estilo Your Name) */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -2;
+            object-fit: cover;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 20, 0.5);
+            z-index: -1;
+        }
+        /* Animación de aparición del texto */
+        .linea {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1.5s ease;
+        }
+        .linea.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="text-white">
+
+    <!-- VIDEO DE FONDO (Cielo en movimiento estilo Your Name) -->
+    <video class="video-background" autoplay muted loop playsinline>
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-sky-and-clouds-time-lapse-1275-large.mp4" type="video/mp4">
+    </video>
+    <div class="overlay"></div>
+
+    <!-- AUDIO -->
+    <audio id="musica" loop>
+        <source src="tu-cancion.mp3" type="audio/mpeg">
+    
+
+    <!-- CONTENIDO DEL POEMA -->
+    <div class="flex items-center justify-center min-h-screen px-6">
+        <div id="poema" class="text-center max-w-2xl text-xl md:text-2xl leading-loose">
+            <div class="linea">"Tu nombre en mi mano"</div>
+            <br>
+            <div class="linea">Desperté sin saber por qué lloraba,</div>
+            <div class="linea">con un vacío que llevaba tu forma.</div>
+            <br>
+            <div class="linea">El crepúsculo llegó,</div>
+            <div class="linea">ni día ni noche,</div>
+            <div class="linea">y el mundo se desdibujó.</div>
+            <div class="linea">Por un segundo te vi</div>
+            <div class="linea">donde normalmente no existes.</div>
+            <br>
+            <div class="linea italic text-yellow-200">_El hilo del destino nos conecta._</div>
+            <div class="linea">Se enreda, se tuerce, duele,</div>
+            <div class="linea">pero nunca se rompe.</div>
+            <div class="linea">Por eso nos encontramos una y otra vez,</div>
+            <div class="linea">aunque nunca nos reconozcamos.</div>
+            <br>
+            <div class="linea">Escribí <span class="font-bold text-yellow-300">_tu nombre_</span> en mi mano</div>
+            <div class="linea">para no olvidarte.</div>
+            <div class="linea">La tinta se borró.</div>
+            <div class="linea">El recuerdo se fue.</div>
+            <div class="linea">Olvidé tu nombre,</div>
+            <div class="linea">pero no la promesa:</div>
+            <br>
+            <div class="linea text-2xl md:text-3xl text-yellow-300">_No importa dónde estés en este mundo,_</div>
+            <div class="linea text-2xl md:text-3xl text-yellow-300">_te prometo que volveré a encontrarte._</div>
+            <div class="linea">Y cuando lo haga,</div>
+            <div class="linea">lo sabré.</div>
+            <div class="linea font-bold text-3xl mt-4">"Tu nombre es..."</div>
+        </div>
+    </div>
+
+    <script>
+        const lineas = document.querySelectorAll('.linea');
+        const musica = document.getElementById('musica');
+        let indice = 0;
+        let pausado = false;
+        let tiempo;
+
+        function mostrarLineas() {
+            if (indice < lineas.length && !pausado) {
+                lineas[indice].classList.add('visible');
+                indice++;
+                tiempo = setTimeout(mostrarLineas, 1200); // Velocidad suave
+            }
+        }
+
+        // Iniciar
+        window.onload = () => {
+            mostrarLineas();
+            musica.play().catch(()=>{});
+        }
+
+        // Pausar/Continuar al hacer clic
+        document.body.addEventListener('click', () => {
+            pausado = !pausado;
+            if(pausado){
+                clearTimeout(tiempo);
+                musica.pause();
+            } else {
+                mostrarLineas();
+                musica.play();
+            }
+        });
+    </script>
+
+</body>
+</html>
