@@ -12,25 +12,47 @@
             cursor: pointer;
             overflow: hidden;
         }
-        /* Fondo animado (Video de fondo estilo Your Name) */
-        .video-background {
+
+        /* ✅ CAMBIADO: Fondo con tu imagen */
+        .fondo {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
+            background-image: url('tu-imagen.jpg');
+            background-size: cover;
+            background-position: center;
             z-index: -2;
-            object-fit: cover;
         }
+
+        /* ✅ EFECTO DE LUZ MOVIÉNDOSE */
+        .luz {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: radial-gradient(circle at center, rgba(255, 180, 80, 0.2) 0%, transparent 70%);
+            animation: brillo 8s infinite ease-in-out;
+            z-index: -1;
+        }
+
+        @keyframes brillo {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
         .overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100vh;
-            background: rgba(0, 0, 20, 0.5);
+            background: rgba(0, 0, 20, 0.4);
             z-index: -1;
         }
+
         /* Animación de aparición del texto */
         .linea {
             opacity: 0;
@@ -45,10 +67,9 @@
 </head>
 <body class="text-white">
 
-    <!-- VIDEO DE FONDO (Cielo en movimiento estilo Your Name) -->
-    <video class="video-background" autoplay muted loop playsinline>
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-sky-and-clouds-time-lapse-1275-large.mp4" type="video/mp4">
-    </video>
+    <!-- ✅ PUESTA TU IMAGEN COMO FONDO -->
+    <div class="fondo"></div>
+    <div class="luz"></div>
     <div class="overlay"></div>
 
     <!-- AUDIO -->
