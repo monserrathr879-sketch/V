@@ -1,244 +1,329 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tu nombre en mi mano - Your Name</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Tailwind -->
-    <script src="https://cdn.tailwindcss.com"></script>
+<title>Your Name Style</title>
 
-    <!-- Fuente -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
 
-    <style>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-        }
+<style>
 
-        body{
-            font-family:'Playfair Display', serif;
-            overflow:hidden;
-            cursor:pointer;
-            color:white;
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-        /* Fondo */
-        .fondo{
-            position:fixed;
-            inset:0;
-            width:100%;
-            height:100vh;
+html,body{
+    min-height:100%;
+    overflow-x:hidden;
+    scroll-behavior:smooth;
+}
 
-            background-image:
-                linear-gradient(rgba(0,0,0,.45), rgba(0,0,30,.6)),
-                url('Screenshot_2026-05-06-21-52-08-640_com.pinterest.jpg');
+body{
+    font-family:'Playfair Display', serif;
+    color:white;
+    position:relative;
+    cursor:pointer;
+}
 
-            background-size:cover;
-            background-position:center;
-            background-repeat:no-repeat;
+/* FONDO MÁS GRANDE */
+.fondo{
+    position:fixed;
+    inset:0;
 
-            z-index:-3;
-        }
+    background:
+    linear-gradient(rgba(0,0,0,.45), rgba(0,0,20,.75)),
+    url('Screenshot_2026-05-06-21-52-08-640_com.pinterest.jpg');
 
-        /* Luz animada */
-        .luz{
-            position:fixed;
-            inset:0;
-            width:100%;
-            height:100vh;
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
 
-            background:
-                radial-gradient(circle at center,
-                rgba(255,190,90,.25) 0%,
-                transparent 70%);
+    transform:scale(1.15);
 
-            animation: brillo 8s ease-in-out infinite;
+    z-index:-3;
+}
 
-            z-index:-2;
-        }
+/* EFECTO DE LUZ */
+.luz{
+    position:fixed;
+    inset:0;
 
-        @keyframes brillo{
+    background:
+    radial-gradient(circle,
+    rgba(255,190,120,.25) 0%,
+    transparent 70%);
 
-            0%,100%{
-                opacity:.5;
-                transform:scale(1);
-            }
+    animation: aura 10s infinite ease-in-out;
 
-            50%{
-                opacity:1;
-                transform:scale(1.15);
-            }
-        }
+    z-index:-2;
+}
 
-        /* Contenedor poema */
-        #poema{
-            text-shadow:0 0 10px rgba(0,0,0,.8);
-        }
+@keyframes aura{
 
-        /* Animación */
-        .linea{
-            opacity:0;
-            transform:translateY(30px);
-            transition:
-                opacity 1.5s ease,
-                transform 1.5s ease;
-        }
+    0%,100%{
+        opacity:.5;
+        transform:scale(1);
+    }
 
-        .linea.visible{
-            opacity:1;
-            transform:translateY(0);
-        }
+    50%{
+        opacity:1;
+        transform:scale(1.25);
+    }
+}
 
-    </style>
+/* CONTENEDOR */
+.contenedor{
+    width:100%;
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:120px 20px;
+}
+
+/* POEMA */
+#poema{
+    max-width:900px;
+    text-align:center;
+
+    font-size:1.5rem;
+    line-height:2.4rem;
+
+    text-shadow:
+    0 0 10px rgba(255,255,255,.25),
+    0 0 20px rgba(255,255,255,.15),
+    0 0 30px rgba(0,0,0,.8);
+}
+
+/* NUEVA ANIMACIÓN */
+.linea{
+
+    opacity:0;
+
+    filter:blur(15px);
+
+    transform:
+    translateY(40px)
+    scale(.95);
+
+    transition:
+    opacity 2s ease,
+    transform 2s ease,
+    filter 2s ease;
+}
+
+.linea.visible{
+
+    opacity:1;
+
+    filter:blur(0);
+
+    transform:
+    translateY(0)
+    scale(1);
+}
+
+/* FRASES IMPORTANTES */
+.destino{
+    color:#ffe082;
+    font-style:italic;
+}
+
+.final{
+    font-size:2.2rem;
+    color:#ffd54f;
+    font-weight:bold;
+}
+
+.nombre{
+    font-size:3rem;
+    margin-top:40px;
+    font-weight:bold;
+}
+
+</style>
 </head>
 
 <body>
 
-    <!-- Fondo -->
-    <div class="fondo"></div>
-    <div class="luz"></div>
+<!-- Fondo -->
+<div class="fondo"></div>
+<div class="luz"></div>
 
-    <!-- Audio -->
-    <audio id="musica" loop>
-        <source src="Sparkle _ Your Name AMV.mp3" type="audio/mpeg">
-    </audio>
+<!-- Audio -->
+<audio id="musica">
+    <source src="Sparkle _ Your Name AMV.mp3" type="audio/mpeg">
+</audio>
 
-    <!-- Contenido -->
-    <div class="flex items-center justify-center min-h-screen px-6">
+<!-- Contenido -->
+<div class="contenedor">
 
-        <div id="poema"
-            class="text-center max-w-3xl text-xl md:text-2xl leading-loose">
+<div id="poema">
 
-            <div class="linea text-3xl md:text-5xl font-bold text-yellow-300 mb-6">
-                "Tu nombre en mi mano"
-            </div>
+<div class="linea final">"Tu nombre en mi mano"</div>
 
-            <div class="linea">Desperté sin saber por qué lloraba,</div>
-            <div class="linea">con un vacío que llevaba tu forma.</div>
+<br>
 
-            <br>
+<div class="linea">Desperté sin saber por qué lloraba,</div>
 
-            <div class="linea">El crepúsculo llegó,</div>
-            <div class="linea">ni día ni noche,</div>
-            <div class="linea">y el mundo se desdibujó.</div>
+<div class="linea">con un vacío que llevaba tu forma.</div>
 
-            <div class="linea">Por un segundo te vi</div>
-            <div class="linea">donde normalmente no existes.</div>
+<br>
 
-            <br>
+<div class="linea">El crepúsculo llegó,</div>
 
-            <div class="linea italic text-yellow-200">
-                “El hilo del destino nos conecta.”
-            </div>
+<div class="linea">ni día ni noche,</div>
 
-            <div class="linea">Se enreda, se tuerce, duele,</div>
-            <div class="linea">pero nunca se rompe.</div>
+<div class="linea">y el mundo se desdibujó.</div>
 
-            <div class="linea">
-                Por eso nos encontramos una y otra vez,
-            </div>
+<div class="linea">Por un segundo te vi</div>
 
-            <div class="linea">
-                aunque nunca nos reconozcamos.
-            </div>
+<div class="linea">donde normalmente no existes.</div>
 
-            <br>
+<br>
 
-            <div class="linea">
-                Escribí <span class="font-bold text-yellow-300">tu nombre</span> en mi mano
-            </div>
+<div class="linea destino">
+“El hilo del destino nos conecta.”
+</div>
 
-            <div class="linea">para no olvidarte.</div>
-            <div class="linea">La tinta se borró.</div>
-            <div class="linea">El recuerdo se fue.</div>
+<div class="linea">Se enreda, se tuerce, duele,</div>
 
-            <div class="linea">Olvidé tu nombre,</div>
+<div class="linea">pero nunca se rompe.</div>
 
-            <div class="linea">pero no la promesa:</div>
+<div class="linea">
+Por eso nos encontramos una y otra vez,
+</div>
 
-            <br>
+<div class="linea">
+aunque nunca nos reconozcamos.
+</div>
 
-            <div class="linea text-2xl md:text-4xl text-yellow-300 font-bold">
-                No importa dónde estés en este mundo,
-            </div>
+<br>
 
-            <div class="linea text-2xl md:text-4xl text-yellow-300 font-bold">
-                te prometo que volveré a encontrarte.
-            </div>
+<div class="linea">
+Escribí <span class="text-yellow-300">tu nombre</span> en mi mano
+</div>
 
-            <br>
+<div class="linea">para no olvidarte.</div>
 
-            <div class="linea">Y cuando lo haga...</div>
+<div class="linea">La tinta se borró.</div>
 
-            <div class="linea">lo sabré.</div>
+<div class="linea">El recuerdo se fue.</div>
 
-            <div class="linea text-4xl mt-8 font-bold text-white">
-                "Tu nombre es..."
-            </div>
+<div class="linea">Olvidé tu nombre...</div>
 
-        </div>
+<div class="linea">pero no la promesa.</div>
 
-    </div>
+<br>
 
-    <script>
+<div class="linea final">
+No importa dónde estés en este mundo,
+</div>
 
-        const lineas = document.querySelectorAll('.linea');
-        const musica = document.getElementById('musica');
+<div class="linea final">
+te prometo que volveré a encontrarte.
+</div>
 
-        let indice = 0;
-        let pausado = false;
-        let tiempo;
+<br>
 
-        function mostrarLineas(){
+<div class="linea">Y cuando lo haga...</div>
 
-            if(pausado) return;
+<div class="linea">lo sabré.</div>
 
-            if(indice < lineas.length){
+<div class="linea nombre">
+"Tu nombre es..."
+</div>
 
-                lineas[indice].classList.add('visible');
+</div>
+</div>
 
-                indice++;
+<script>
 
-                tiempo = setTimeout(mostrarLineas, 1300);
-            }
-        }
+const lineas = document.querySelectorAll('.linea');
+const musica = document.getElementById('musica');
 
-        // Iniciar
-        window.onload = () => {
+let indice = 0;
+let pausado = false;
 
-            mostrarLineas();
+/* TIEMPOS MÁS CINEMATOGRÁFICOS */
+const velocidades = [
+2000,2000,
+1800,1800,
+1800,1800,
+1800,1800,
+2200,
+1800,1800,
+1800,2200,
+2200,
+1800,
+1800,
+1800,
+1800,
+2200,
+2200,
+2600,
+2600,
+2500,
+2200,
+3000
+];
 
-            musica.play().catch(() => {
-                console.log("Autoplay bloqueado");
-            });
+function mostrarLineas(){
 
-        }
+    if(pausado) return;
 
-        // Pausa/Reanuda
-        document.body.addEventListener('click', () => {
+    if(indice < lineas.length){
 
-            pausado = !pausado;
+        lineas[indice].classList.add('visible');
 
-            if(pausado){
-
-                clearTimeout(tiempo);
-
-                musica.pause();
-
-            }else{
-
-                musica.play();
-
-                mostrarLineas();
-            }
-
+        /* SCROLL AUTOMÁTICO */
+        lineas[indice].scrollIntoView({
+            behavior:"smooth",
+            block:"center"
         });
 
-    </script>
+        let tiempo = velocidades[indice] || 2000;
+
+        indice++;
+
+        setTimeout(mostrarLineas, tiempo);
+    }
+}
+
+/* INICIAR */
+window.onload = () => {
+
+    musica.play().catch(()=>{});
+
+    mostrarLineas();
+}
+
+/* PAUSA */
+document.body.addEventListener('click', ()=>{
+
+    pausado = !pausado;
+
+    if(pausado){
+
+        musica.pause();
+
+    }else{
+
+        musica.play();
+
+        mostrarLineas();
+    }
+});
+
+</script>
 
 </body>
-</html>
+    </html>
