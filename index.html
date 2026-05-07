@@ -4,146 +4,240 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tu nombre en mi mano - Your Name</title>
+
+    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fuente -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
-        body {
-            font-family: 'Playfair Display', serif;
-            cursor: pointer;
-            overflow: hidden;
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
         }
 
-        /* Fondo con tu imagen */
-        .fondo {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-image: url('Screenshot_2026-05-06-21-52-08-640_com.pinterest.jpg');
-            background-size: cover;
-            background-position: center;
-            z-index: -2;
+        body{
+            font-family:'Playfair Display', serif;
+            overflow:hidden;
+            cursor:pointer;
+            color:white;
         }
 
-        /* EFECTO DE LUZ MOVIÉNDOSE */
-        .luz {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: radial-gradient(circle at center, rgba(255, 180, 80, 0.2) 0%, transparent 70%);
-            animation: brillo 8s infinite ease-in-out;
-            z-index: -1;
+        /* Fondo */
+        .fondo{
+            position:fixed;
+            inset:0;
+            width:100%;
+            height:100vh;
+
+            background-image:
+                linear-gradient(rgba(0,0,0,.45), rgba(0,0,30,.6)),
+                url('Screenshot_2026-05-06-21-52-08-640_com.pinterest.jpg');
+
+            background-size:cover;
+            background-position:center;
+            background-repeat:no-repeat;
+
+            z-index:-3;
         }
 
-        @keyframes brillo {
-            0%, 100% { opacity: 0.5; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
+        /* Luz animada */
+        .luz{
+            position:fixed;
+            inset:0;
+            width:100%;
+            height:100vh;
+
+            background:
+                radial-gradient(circle at center,
+                rgba(255,190,90,.25) 0%,
+                transparent 70%);
+
+            animation: brillo 8s ease-in-out infinite;
+
+            z-index:-2;
         }
 
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: rgba(0, 0, 20, 0.4);
-            z-index: -1;
+        @keyframes brillo{
+
+            0%,100%{
+                opacity:.5;
+                transform:scale(1);
+            }
+
+            50%{
+                opacity:1;
+                transform:scale(1.15);
+            }
         }
 
-        /* Animación de aparición del texto */
-        .linea {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 1.5s ease;
+        /* Contenedor poema */
+        #poema{
+            text-shadow:0 0 10px rgba(0,0,0,.8);
         }
-        .linea.visible {
-            opacity: 1;
-            transform: translateY(0);
+
+        /* Animación */
+        .linea{
+            opacity:0;
+            transform:translateY(30px);
+            transition:
+                opacity 1.5s ease,
+                transform 1.5s ease;
         }
+
+        .linea.visible{
+            opacity:1;
+            transform:translateY(0);
+        }
+
     </style>
 </head>
-<body class="text-white">
 
-    <!-- IMAGEN DE FONDO -->
+<body>
+
+    <!-- Fondo -->
     <div class="fondo"></div>
     <div class="luz"></div>
-    <div class="overlay"></div>
 
-    <!-- AUDIO ✅ AHORA ESTÁ CERRADO CORRECTAMENTE -->
+    <!-- Audio -->
     <audio id="musica" loop>
         <source src="Sparkle _ Your Name AMV.mp3" type="audio/mpeg">
-    
+    </audio>
 
-    <!-- CONTENIDO DEL POEMA -->
+    <!-- Contenido -->
     <div class="flex items-center justify-center min-h-screen px-6">
-        <div id="poema" class="text-center max-w-2xl text-xl md:text-2xl leading-loose">
-            <div class="linea">"Tu nombre en mi mano"</div>
-            <br>
+
+        <div id="poema"
+            class="text-center max-w-3xl text-xl md:text-2xl leading-loose">
+
+            <div class="linea text-3xl md:text-5xl font-bold text-yellow-300 mb-6">
+                "Tu nombre en mi mano"
+            </div>
+
             <div class="linea">Desperté sin saber por qué lloraba,</div>
             <div class="linea">con un vacío que llevaba tu forma.</div>
+
             <br>
+
             <div class="linea">El crepúsculo llegó,</div>
             <div class="linea">ni día ni noche,</div>
             <div class="linea">y el mundo se desdibujó.</div>
+
             <div class="linea">Por un segundo te vi</div>
             <div class="linea">donde normalmente no existes.</div>
+
             <br>
-            <div class="linea italic text-yellow-200">_El hilo del destino nos conecta._</div>
+
+            <div class="linea italic text-yellow-200">
+                “El hilo del destino nos conecta.”
+            </div>
+
             <div class="linea">Se enreda, se tuerce, duele,</div>
             <div class="linea">pero nunca se rompe.</div>
-            <div class="linea">Por eso nos encontramos una y otra vez,</div>
-            <div class="linea">aunque nunca nos reconozcamos.</div>
+
+            <div class="linea">
+                Por eso nos encontramos una y otra vez,
+            </div>
+
+            <div class="linea">
+                aunque nunca nos reconozcamos.
+            </div>
+
             <br>
-            <div class="linea">Escribí <span class="font-bold text-yellow-300">_tu nombre_</span> en mi mano</div>
+
+            <div class="linea">
+                Escribí <span class="font-bold text-yellow-300">tu nombre</span> en mi mano
+            </div>
+
             <div class="linea">para no olvidarte.</div>
             <div class="linea">La tinta se borró.</div>
             <div class="linea">El recuerdo se fue.</div>
+
             <div class="linea">Olvidé tu nombre,</div>
+
             <div class="linea">pero no la promesa:</div>
+
             <br>
-            <div class="linea text-2xl md:text-3xl text-yellow-300">_No importa dónde estés en este mundo,_</div>
-            <div class="linea text-2xl md:text-3xl text-yellow-300">_te prometo que volveré a encontrarte._</div>
-            <div class="linea">Y cuando lo haga,</div>
+
+            <div class="linea text-2xl md:text-4xl text-yellow-300 font-bold">
+                No importa dónde estés en este mundo,
+            </div>
+
+            <div class="linea text-2xl md:text-4xl text-yellow-300 font-bold">
+                te prometo que volveré a encontrarte.
+            </div>
+
+            <br>
+
+            <div class="linea">Y cuando lo haga...</div>
+
             <div class="linea">lo sabré.</div>
-            <div class="linea font-bold text-3xl mt-4">"Tu nombre es..."</div>
+
+            <div class="linea text-4xl mt-8 font-bold text-white">
+                "Tu nombre es..."
+            </div>
+
         </div>
+
     </div>
 
     <script>
+
         const lineas = document.querySelectorAll('.linea');
         const musica = document.getElementById('musica');
+
         let indice = 0;
         let pausado = false;
         let tiempo;
 
-        function mostrarLineas() {
-            if (indice < lineas.length && !pausado) {
+        function mostrarLineas(){
+
+            if(pausado) return;
+
+            if(indice < lineas.length){
+
                 lineas[indice].classList.add('visible');
+
                 indice++;
-                tiempo = setTimeout(mostrarLineas, 1200);
+
+                tiempo = setTimeout(mostrarLineas, 1300);
             }
         }
 
         // Iniciar
         window.onload = () => {
+
             mostrarLineas();
-            musica.play().catch(()=>{});
+
+            musica.play().catch(() => {
+                console.log("Autoplay bloqueado");
+            });
+
         }
 
-        // Pausar/Continuar al hacer clic
+        // Pausa/Reanuda
         document.body.addEventListener('click', () => {
+
             pausado = !pausado;
+
             if(pausado){
+
                 clearTimeout(tiempo);
+
                 musica.pause();
-            } else {
-                mostrarLineas();
+
+            }else{
+
                 musica.play();
+
+                mostrarLineas();
             }
+
         });
+
     </script>
 
 </body>
