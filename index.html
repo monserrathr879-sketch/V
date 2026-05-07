@@ -13,7 +13,7 @@
             overflow: hidden;
         }
 
-        /* ✅ CAMBIADO: Fondo con tu imagen */
+        /* Fondo con tu imagen */
         .fondo {
             position: fixed;
             top: 0;
@@ -26,7 +26,7 @@
             z-index: -2;
         }
 
-        /* ✅ EFECTO DE LUZ MOVIÉNDOSE */
+        /* EFECTO DE LUZ MOVIÉNDOSE */
         .luz {
             position: fixed;
             top: 0;
@@ -67,12 +67,12 @@
 </head>
 <body class="text-white">
 
-    <!-- ✅ PUESTA TU IMAGEN COMO FONDO -->
+    <!-- IMAGEN DE FONDO -->
     <div class="fondo"></div>
     <div class="luz"></div>
     <div class="overlay"></div>
 
-    <!-- AUDIO -->
+    <!-- AUDIO ✅ AHORA ESTÁ CERRADO CORRECTAMENTE -->
     <audio id="musica" loop>
         <source src="Sparkle _ Your Name AMV.mp3" type="audio/mpeg">
     
@@ -123,7 +123,7 @@
             if (indice < lineas.length && !pausado) {
                 lineas[indice].classList.add('visible');
                 indice++;
-                tiempo = setTimeout(mostrarLineas, 1200); // Velocidad suave
+                tiempo = setTimeout(mostrarLineas, 1200);
             }
         }
 
